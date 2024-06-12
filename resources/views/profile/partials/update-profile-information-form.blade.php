@@ -9,11 +9,16 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    {{-- 変更 --}}
+    @if(!isset($admin))
+        <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+            @csrf
+        </form>
+        <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+       @else
+        <form method="post" action="{{ route('profile.adupdate', $user) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+    @endif
+    {{-- 変更ここまで --}}
         @csrf
         @method('patch')
 
@@ -45,6 +50,16 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        {{-- アバター更新用に追加 --}}
+        <div>
+           <x-input-label for="avatar" :value="__('プロフィール画像（任意・1MBまで）')" />
+           <div class="rounded-full w-36">
+               <img src="{{asset('storage/avatar/'.($user->avatar??'user_default.jpg'))}}">
+           </div>
+           <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" :value="old('avatar')" />
+           <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
         </div>
 
         <div class="flex items-center gap-4">

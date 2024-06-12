@@ -3,6 +3,8 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             投稿の新規作成
         </h2>
+        <x-message :message="session('message')" />
+        <x-validation-errors class="mb-4" :errors="$errors" />
     </x-slot>
 
         {{-- 最初に作成した部分 --}}
@@ -14,17 +16,17 @@
                     <div class="md:flex items-center mt-8">
                         <div class="w-full flex flex-col">
                         <label for="title" class="font-semibold leading-none mt-4">件名</label>
-                        <input type="text" name="title" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="title" placeholder="Enter Title">
+                        <input type="text" name="title" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="title" placeholder="件名を入力してください" value="{{ old('title') }}">
                         </div>
                     </div>
 
                     <div class="w-full flex flex-col">
                         <label for="body" class="font-semibold leading-none mt-4">本文</label>
-                        <textarea name="body" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" rows="10"></textarea>
+                        <textarea name="body" class="w-auto py-2 border border-gray-300 rounded-md placeholder-gray-300" id="body" cols="30" rows="10" value="{{ old('body') }}" placeholder="なんでも入力してください！"></textarea>
                     </div>
 
                     <div class="w-full flex flex-col">
-                        <label for="image" class="font-semibold leading-none mt-4">画像 </label>
+                        <label for="image" class="font-semibold leading-none mt-4">画像 (1MBまで)</label>
                         <div>
                         <input id="image" type="file" name="image">
                         </div>

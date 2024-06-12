@@ -32,17 +32,32 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'avatar' => ['image', 'max:1024'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
+        // userテーブルのデータ
+        $attr =[
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ];
+
+        //avatarの保存
+        if(request()->hasFile('avatar')) {
+            $name = request()->file('avatar')->getClientOriginalName();
+            $avatar = date('Ymd_His').'_'.$name;
+            request()->file('avatar')->storeAs('public/avatar', $avatar);
+            //avatarファイル名をデータに追加
+            $attr['avatar']=$avatar;
+        }
+
+        $user = User::create($attr);
 
         event(new Registered($user));
+
+        $user->roles()->attach(2); //役割を付与する。中間テーブルのrole_idに一般会員の2を設定する）
 
         Auth::login($user);
 

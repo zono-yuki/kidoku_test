@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
-            $table->text('image')->nullable;
+            $table->text('image')->nullable();//ここをnullable()にしないとのちのち登校する時にエラーになる これでダメだったからphpmyadminで変更した
             $table->timestamps();
         });
     }

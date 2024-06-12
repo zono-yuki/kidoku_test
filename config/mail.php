@@ -108,9 +108,11 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'yoshihiko-portfolio@maezono-laravel-keiziban.net'),
+        'name' => env('MAIL_FROM_NAME', 'yoshihiko'),
     ],
+
+    'admin'=>env('MAIL_ADMIN', null),
 
     /*
     |--------------------------------------------------------------------------
