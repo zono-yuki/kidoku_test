@@ -16,7 +16,7 @@
                         <div class="mt-4 mb-3">
                             <h1 class="text-base text-gray-500 font-semibold text-right">
                                         <p style="text-align: right">
-                                           {{ $post->user->name }}　<span style="font-size:10px;">さんの投稿</span>
+                                           {{ $post->user->name??'削除されたユーザー' }}　<span style="font-size:10px;">さんの投稿</span>
                                         </p>
                             </h1>
                             <div class="flex">
@@ -62,7 +62,6 @@
                          @endif
                          <div class="text-sm font-semibold flex flex-row-reverse mt-3">
                            {{$post->created_at->format('Y年m月d日')}}
-                            <!-- <p> {{ $post->user->name }} • {{$post->created_at->diffForHumans()}}</p> -->
                          </div>
                 </div>
 
@@ -72,7 +71,7 @@
                     {{$comment->body}}
                     <div class="text-sm font-semibold flex flex-row-reverse">
                         {{-- クラスを変更 --}}
-                        <p class="float-left pt-4"> {{ $comment->user->name }}　{{$comment->created_at->format('Y年m月d日')}}</p>
+                        <p class="float-left pt-4"> {{ $comment->user->name??'削除されたユーザー' }}　{{$comment->created_at->format('Y年m月d日')}}</p>
                         {{-- アバター追加 --}}
                         <img width="60" height="auto" src="{{asset('storage/avatar/'.($comment->user->avatar??'user_default.jpg'))}}">
 

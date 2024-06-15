@@ -19,7 +19,7 @@
                         <div class="mt-4">
                             <h1 class="text-base text-gray-500 font-semibold text-right">
                                         <p style="text-align: right">
-                                           {{ $post->user->name }}　<span style="font-size:10px;">さんの投稿</span>
+                                           {{ $post->user->name??'削除されたユーザー' }}　<span style="font-size:10px;">さんの投稿</span>
                                         </p>
                             </h1>
                             <div class="flex">
@@ -43,7 +43,7 @@
                                <img src="{{ asset('storage/images/' .$post->image) }}" class="mx-auto"  style="height:300px;">
                             @endif
                             <div class="text-sm font-semibold flex flex-row-reverse mt-3">
-                                <!-- <p>{{ $post->user->name }} • {{$post -> created_at -> diffForHumans()}}</p> -->
+                                
                                 {{$post->created_at->format('Y年m月d日')}}
                             </div>
                             <hr class="w-full mb-2">

@@ -29,7 +29,7 @@
                         <div class="mt-4 mb-4">
                             <h1 class="text-base text-gray-500 font-semibold text-right">
                                         <p style="text-align: right">
-                                           {{ $post->user->name }}　<span style="font-size:10px;">さんの投稿</span>
+                                           {{ $post->user->name??'削除されたユーザー' }}　<span style="font-size:10px;">さんの投稿</span>
                                         </p>
                             </h1>
                             <div class="flex">

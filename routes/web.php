@@ -53,6 +53,7 @@ Route::middleware('verified')->group(function () {//authをverifiedにしたら�
        Route::get('profile/index', [ProfileController::class, 'index'])->name('profile.index');
        Route::get('/profile/adedit/{user}', [ProfileController::class, 'adedit'])->name('profile.adedit');
        Route::patch('/profile/adupdate/{user}', [ProfileController::class, 'adupdate'])->name('profile.adupdate');
+       Route::delete('profile/{user}', [ProfileController::class, 'addestroy'])->name('profile.addestroy');
 
        //中間テーブルの権限のつけ外し　attach detach
        Route::patch('roles/{user}/attach', [RoleController::class, 'attach'])->name('role.attach');
